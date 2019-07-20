@@ -5,7 +5,8 @@
     "sourceMap": true, // 输出 Source Map 方便调试
     "importHelpers": true,
     "jsx": "react", // 开启 jsx ，支持 React
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     // 不编译这些目录里的文件

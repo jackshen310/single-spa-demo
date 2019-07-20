@@ -113,6 +113,7 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     // new NameAllModulesPlugin(),
+    // new webpack.ContextReplacementPlugin(/(.+)?angular(\\|\/)core(.+)?/, path.resolve(__dirname, '../src')),
   ],
   // 参数说明：https://imweb.io/topic/5b66dd601402769b60847149
   // https://juejin.im/post/5b304f1f51882574c72f19b0

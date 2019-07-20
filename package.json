@@ -13,6 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/common": "^4.3.3",
+    "@angular/compiler": "^4.3.3",
+    "@angular/core": "^4.3.3",
+    "@angular/platform-browser": "^4.3.3",
+    "@angular/platform-browser-dynamic": "^4.3.3",
+    "@angular/router": "^4.3.6",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "lodash": "^4.17.11",
@@ -20,7 +26,14 @@
     "react-dom": "^16.8.6",
     "react-loadable": "^5.5.0",
     "react-router-dom": "^5.0.1",
-    "webpack": "^4.35.0"
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.5.2",
+    "single-spa": "^4.3.6",
+    "single-spa-angular": "^3.0.1",
+    "single-spa-react": "^2.10.2",
+    "webpack": "^4.35.0",
+    "zone.js": "^0.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
