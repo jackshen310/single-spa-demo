@@ -9,8 +9,8 @@ let win;
 function createWindow() {
   // 创建浏览器窗口
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 960,
     webPreferences: {
       nodeIntegration: true, // https://newsn.net/say/electron-require-not-defined.html
     },
@@ -19,6 +19,7 @@ function createWindow() {
   // 加载应用的 index.html
   const indexPageURL = `http://localhost:${config.port}/index.html`;
   win.loadURL(indexPageURL);
+  win.webContents.openDevTools();
 
   // 当 window 被关闭，这个事件会被触发
   win.on('closed', () => {

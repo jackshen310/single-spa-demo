@@ -9,7 +9,6 @@ const HappyPack = require('happypack');
 // 构造出共享进程池，进程池中包含5个子进程
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
-console.log('dddd', process.env.NODE_ENV);
 module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
