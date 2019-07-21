@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //引入html-webpack-plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 使用参考：https://www.npmjs.com/package/mini-css-extract-plugin
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 // http://webpack.wuhaolin.cn/4%E4%BC%98%E5%8C%96/4-3%E4%BD%BF%E7%94%A8HappyPack.html
 const HappyPack = require('happypack');
@@ -12,7 +11,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
-    index: ['./src/root-app/root-app.js'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    index: ['./src/root-app/index.jsx'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
     'common-dependencies': [
       // We want just one version of angular, so we put it into the common dependencies
       'core-js/client/shim.min.js',
