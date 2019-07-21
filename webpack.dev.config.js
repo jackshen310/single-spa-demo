@@ -6,7 +6,7 @@ const MyPlugin = require('./plugins/MyPlugin');
 const AutoRunElectronPlugin = require('./plugins/AutoRunElectronPlugin');
 const config = require('./config/dev');
 
-module.exports = merge(baseWebpackConfig, {
+module.exports = merge.smart(baseWebpackConfig, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map', // sourceMap https://blog.csdn.net/liwusen/article/details/79414508
   plugins: [

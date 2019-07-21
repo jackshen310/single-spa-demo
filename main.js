@@ -39,3 +39,5 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "NODE_ENV=production webpack --config webpack.prod.config.js  --display-used-exports --optimize-minimize",
-    "dev": "node webpack.dev.server.js",
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
+    "dev-server": "node webpack.dev.server.js",
     "dll": "NODE_ENV=production webpack --config webpack.dll.config.js"
   },
   "keywords": [],
@@ -21,6 +22,7 @@
     "@angular/router": "^4.3.6",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "core-js": "^2.4.1",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

@@ -11,9 +11,9 @@ export default class App extends Component {
   render() {
     funcA();
     return (
-      <div>
+      <div style={{ marginTop: '100px' }}>
         this is {process.env.NODE_ENV} mode <br />
-        <Router>
+        <Router basename="/app1">
           <div>
             <Suspense fallback={this.fallback()}>
               {routes.map((route, i) => {

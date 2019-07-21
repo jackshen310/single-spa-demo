@@ -12,7 +12,22 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
-    index: './scripts/index.jsx', //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    index: ['./src/root-app/root-app.js'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    'common-dependencies': [
+      // We want just one version of angular, so we put it into the common dependencies
+      'core-js/client/shim.min.js',
+      '@angular/common',
+      '@angular/compiler',
+      '@angular/core',
+      '@angular/platform-browser-dynamic',
+      '@angular/router',
+      'reflect-metadata',
+      /* Just one version of react, too. react-router is fine to have multiple versions of,
+       * though, so no need to put it in common dependencies
+       */
+      'react',
+      'react-dom',
+    ],
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-2Output.html
   output: {
@@ -127,32 +142,33 @@ module.exports = {
    */
   optimization: {
     splitChunks: {
-      cacheGroups: {
-        commons: {
-          // 抽离自己写的公共代码，例如 show.js这个被多个组件引用了，所以会单独成一个common.js
-          chunks: 'async', //
-          name: 'common', // 打包后的文件名，任意命名
-          minChunks: 2, //最小引用2次
-          minSize: 0, // 只要超出0字节就生成一个新包
-          priority: 2,
-        },
-        vendor: {
-          // 抽离第三方插件,例如React
-          test: /node_modules/, // 指定是node_modules下的第三方包
-          chunks: 'initial',
-          name: 'vendor', // 打包后的文件名，任意命名
-          // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
-          priority: 10,
-        },
-        lodash: {
-          // 演示：将lodash库单独成一个chunk
-          test: /node_modules\/lodash/,
-          chunks: 'all', // 默认 Webpack 4 只会对按需加载的代码做分割。如果我们需要配置初始加载的代码也加入到代码分割中，可以设置 splitChunks.chunks 为 'all'
-          name: 'lodash', // 打包后的文件名，任意命名
-          // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
-          priority: 20,
-        },
-      },
+      name: 'common-dependencies',
+      //     cacheGroups: {
+      // commons: {
+      //   // 抽离自己写的公共代码，例如 show.js这个被多个组件引用了，所以会单独成一个common.js
+      //   chunks: 'async', //
+      //   name: 'common', // 打包后的文件名，任意命名
+      //   minChunks: 2, //最小引用2次
+      //   minSize: 0, // 只要超出0字节就生成一个新包
+      //   priority: 2,
+      // },
+      // vendor: {
+      //   // 抽离第三方插件,例如React
+      //   test: /node_modules/, // 指定是node_modules下的第三方包
+      //   chunks: 'initial',
+      //   name: 'vendor', // 打包后的文件名，任意命名
+      //   // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+      //   priority: 10,
+      // },
+      // lodash: {
+      //   // 演示：将lodash库单独成一个chunk
+      //   test: /node_modules\/lodash/,
+      //   chunks: 'all', // 默认 Webpack 4 只会对按需加载的代码做分割。如果我们需要配置初始加载的代码也加入到代码分割中，可以设置 splitChunks.chunks 为 'all'
+      //   name: 'lodash', // 打包后的文件名，任意命名
+      //   // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+      //   priority: 20,
+      // },
+      //     },
     },
   },
 };

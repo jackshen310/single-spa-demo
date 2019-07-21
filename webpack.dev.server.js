@@ -5,25 +5,7 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const fallback = require('express-history-api-fallback');
 
 // http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-18%E4%BD%BF%E7%94%A8WebpackDevMiddleware.html
-webpackConfig.entry = {
-  index: ['webpack-hot-middleware/client?noInfo=true&reload=true', './src/root-app/root-app.js'],
-  'common-dependencies': [
-    // We want just one version of angular, so we put it into the common dependencies
-    'core-js/client/shim.min.js',
-    '@angular/common',
-    '@angular/compiler',
-    '@angular/core',
-    '@angular/platform-browser-dynamic',
-    '@angular/router',
-    'reflect-metadata',
-    /* Just one version of react, too. react-router is fine to have multiple versions of,
-     * though, so no need to put it in common dependencies
-     */
-    'react',
-    'react-dom',
-  ],
-};
-webpackConfig.entry = ['webpack-hot-middleware/client?noInfo=true&reload=true', './src/root-app/root-app.js'];
+webpackConfig.entry.index.unshift('webpack-hot-middleware/client?noInfo=true&reload=true');
 
 // 实例化一个 Expressjs app
 const app = express();
