@@ -37,6 +37,9 @@ registerApplication('app-1', () => import('../app1/index.js'), pathPrefix('/app1
 registerApplication('app-2', () => import('../app2/index.js'), pathPrefix('/app2'), {
   appInfo: 'angular app',
 });
+registerApplication('app-3', () => import('../app3/index.js'), pathPrefix('/app3'), {
+  appInfo: 'vue app',
+});
 
 start();
 
