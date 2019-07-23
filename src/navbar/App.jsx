@@ -14,9 +14,9 @@ class App extends React.Component {
         <a onClick={this.handleRoute.bind(this, '/app1')}>
           <li>App 1</li>
         </a>
-        {/* <a onClick={this.handleRoute.bind(this, '/app2')}>
+        <a onClick={this.handleRoute.bind(this, '/app2')}>
           <li>App 2</li>
-        </a> */}
+        </a>
         <a onClick={this.handleRoute.bind(this, '/app3')}>
           <li>App 3</li>
         </a>

@@ -17,9 +17,9 @@ registerApplication(
 registerApplication('app-1', () => SystemJS.import('@portal/app1'), pathPrefix('/app1'), {
   appInfo: 'react app',
 });
-// registerApplication('app-2', () => import('../app2/index.js'), pathPrefix('/app2'), {
-//   appInfo: 'angular app',
-// });
+registerApplication('app-2', () => SystemJS.import('@portal/app2'), pathPrefix('/app2'), {
+  appInfo: 'angular app',
+});
 registerApplication('app-3', () => SystemJS.import('@portal/app3'), pathPrefix('/app3'), {
   appInfo: 'vue app',
 });
