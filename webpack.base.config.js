@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 使用参考
 
 // http://webpack.wuhaolin.cn/4%E4%BC%98%E5%8C%96/4-3%E4%BD%BF%E7%94%A8HappyPack.html
 const HappyPack = require('happypack');
+const CopyPlugin = require('copy-webpack-plugin');
 // 构造出共享进程池，进程池中包含5个子进程
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
@@ -125,5 +126,11 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     // new NameAllModulesPlugin(),
+    new CopyPlugin([
+      { from: './node_modules/systemjs/dist/system.js', to: '' },
+      { from: './node_modules/systemjs/dist/extras/amd.js', to: 'extras/' },
+      { from: './node_modules/systemjs/dist/extras/named-exports.js', to: 'extras/' },
+      { from: './node_modules/systemjs/dist/extras/use-default.js', to: 'extras/' },
+    ]),
   ],
 };

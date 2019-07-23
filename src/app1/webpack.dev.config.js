@@ -7,9 +7,6 @@ const config = require('./config/dev');
 module.exports = merge.smart(baseWebpackConfig, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map', // sourceMap https://blog.csdn.net/liwusen/article/details/79414508
-  output: {
-    publicPath: `http://localhost:${config.port}/`,
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
   ],
