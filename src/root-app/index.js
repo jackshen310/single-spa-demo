@@ -1,5 +1,6 @@
 import { registerApplication, start } from 'single-spa';
 import config from './config/dev';
+import '../navbar/src/index.css'; // FIXME 这个样式放到navbar项目不生效，故先临时放在这里
 
 window.SystemJS = window.System;
 /**
@@ -11,7 +12,7 @@ window.SystemJS = window.System;
 // 导航页
 registerApplication(
   'navbar',
-  () => import('../navbar/index.js'),
+  () => loadApp('navbar'),
   () => {
     return () => true; // 导航页，永远显示
   }

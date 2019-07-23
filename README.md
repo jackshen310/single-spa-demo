@@ -6,6 +6,7 @@ single-spa 学习记录
 
 ```
 yarn install # 安装依赖
+yarn dev:all # 启动所有微服务
 yarn dev # 开发模式启动（默认端口9090）
 yarn dev-server # 用node server的方式启动
 yarn prod # 生产模式

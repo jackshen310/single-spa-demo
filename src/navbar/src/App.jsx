@@ -3,7 +3,7 @@ require('./index.css');
 
 class App extends React.Component {
   handleRoute = path => {
-    singleSpaNavigate(path);
+    singleSpaNavigate && singleSpaNavigate(path);
   };
   componentDidCatch(e) {
     console.error(e);
