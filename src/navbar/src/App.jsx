@@ -1,25 +1,25 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 require('./index.css');
 
 class App extends React.Component {
-  handleRoute = path => {
-    singleSpaNavigate && singleSpaNavigate(path);
-  };
-  componentDidCatch(e) {
-    console.error(e);
+  componentDidCatch(error, info) {
+    console.error(error, info);
   }
   render() {
     return (
       <ul className="navbar">
-        <a onClick={this.handleRoute.bind(this, '/app1')}>
-          <li>App 1</li>
-        </a>
-        <a onClick={this.handleRoute.bind(this, '/app2')}>
-          <li>App 2</li>
-        </a>
-        <a onClick={this.handleRoute.bind(this, '/app3')}>
-          <li>App 3</li>
-        </a>
+        <Router>
+          <Link href="/app1" to="/app1">
+            <li>App 1</li>
+          </Link>
+          <Link href="/app2" to="/app2">
+            <li>App 2</li>
+          </Link>
+          <Link href="/app3" to="/app3">
+            <li>App 3</li>
+          </Link>
+        </Router>
       </ul>
     );
   }

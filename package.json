@@ -5,6 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install-all": "npm run install:main && npm run install:navbar && npm run install:app1 && npm run install:app2 && npm run install:app3",
+    "install:main": "yarn install",
+    "install:navbar": "cd ./src/navbar/ && yarn install",
+    "install:app1": "cd ./src/app1/ && yarn install",
+    "install:app2": "cd ./src/app2/ && yarn install",
+    "install:app3": "cd ./src/app3/ && yarn install",
     "prod": "NODE_ENV=production webpack --config webpack.prod.config.js  --display-used-exports --optimize-minimize",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
     "dev-server": "node webpack.dev.server.js",
@@ -20,8 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "single-spa": "^4.3.6",
-    "systemjs": "^4.1.0",
-    "webpack": "^4.35.0"
+    "systemjs": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -38,6 +43,7 @@
     "express-history-api-fallback": "^2.2.1",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
+    "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
