@@ -7,11 +7,14 @@ export default class App extends Component {
   fallback = () => {
     return <div>Loading...</div>;
   };
+  componentDidCatch(e) {
+    console.error(e);
+  }
   // React.lazy和Suspense使用参考：https://juejin.im/post/5bd70def6fb9a05d38282c30
   render() {
     funcA();
     return (
-      <div style={{ marginTop: '100px' }}>
+      <div>
         this is {process.env.NODE_ENV} mode <br />
         <Router basename="/app1">
           <div>

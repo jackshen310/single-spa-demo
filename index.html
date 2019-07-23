@@ -4,8 +4,20 @@
     <meta charset="UTF-8" />
     <title>single-spa-demo</title>
   </head>
-
   <body>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@portal/app1": "http://localhost:9091/index.js",
+          "@portal/app3": "http://localhost:9093/index.js"
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/systemjs@4.1.0/dist/system.js"></script>
+    <script src="https://unpkg.com/systemjs@4.1.0/dist/extras/amd.js"></script>
+    <script src="https://unpkg.com/systemjs@4.1.0/dist/extras/named-exports.js"></script>
+    <script src="https://unpkg.com/systemjs@4.1.0/dist/extras/use-default.js"></script>
+
     <div id="root"></div>
   </body>
 </html>

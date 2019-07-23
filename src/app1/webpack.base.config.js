@@ -11,26 +11,11 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
-    index: ['./src/root-app/index.jsx'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
-    // 'common-dependencies': [
-    //   // We want just one version of angular, so we put it into the common dependencies
-    //   'core-js/client/shim.min.js',
-    //   '@angular/common',
-    //   '@angular/compiler',
-    //   '@angular/core',
-    //   '@angular/platform-browser-dynamic',
-    //   '@angular/router',
-    //   'reflect-metadata',
-    //   /* Just one version of react, too. react-router is fine to have multiple versions of,
-    //    * though, so no need to put it in common dependencies
-    //    */
-    //   'react',
-    //   'react-dom',
-    // ],
+    index: ['./src/index.js'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-2Output.html
   output: {
-    filename: '[name].[hash:8].js', //输出文件名，[name]表示入口文件js名
+    filename: '[name].js', //输出文件名，[name]表示入口文件js名
     path: path.join(__dirname, 'dist'), //输出文件路径
     chunkFilename: '[name].[chunkhash:8].js', // chunkhash是根据具体每一个模块文件自己的的内容包括它的依赖计算所得的hash，所以某个文件的改动只会影响它本身的hash，不会影响其它文件。
     publicPath: '/', // 指定资源路径，所有的按需加载的资源都从根路径开始找， https://webpack.js.org/guides/public-path/
@@ -44,8 +29,7 @@ module.exports = {
     // import时可以忽略文件后缀，例如 import App from './App', 而不需要 './App.jsx'
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      components: path.join(__dirname, './src/app1/components'),
-      vue$: 'vue/dist/vue.esm.js',
+      components: path.join(__dirname, './src/components'),
     },
     // 针对 Npm 中的第三方模块优先采用 jsnext:main 中指向的 ES6 模块化语法的文件
     mainFields: ['jsnext:main', 'browser', 'main'],
@@ -102,18 +86,12 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname, '.', 'dll'),
-      manifest: require('./dll/manifest.json'),
-    }),
+    // new webpack.DllReferencePlugin({
+    //   context: path.join(__dirname, '.', 'dll'),
+    //   manifest: require('./dll/manifest.json'),
+    // }),
     // https://www.cnblogs.com/zhishaofei/p/8590627.html
     new webpack.HashedModuleIdsPlugin(),
-    // http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-14%E6%9E%84%E5%BB%BA%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8.html
-    // new ServiceWorkerWebpackPlugin({
-    //   // 自定义的 sw.js 文件所在路径
-    //   // ServiceWorkerWebpackPlugin 会把文件列表注入到生成的 sw.js 中
-    //   entry: path.join(__dirname, 'sw.js'),
-    // }),
     new HappyPack({
       // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
       id: 'babel',
@@ -124,6 +102,5 @@ module.exports = {
       // ... 其它配置项
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    // new NameAllModulesPlugin(),
   ],
 };

@@ -15,3 +15,8 @@ yarn prod # 生产模式
 
 1. single-spa 官方文档 https://single-spa.js.org/docs/building-applications.html
 2. 前端微服务化解决方案 https://alili.tech/archive/5ff0b366/
+3. Coding splitting child apps https://github.com/CanopyTax/single-spa/issues/102
+
+# 待学习
+
+1. https://github.com/reactjs/react-transition-group

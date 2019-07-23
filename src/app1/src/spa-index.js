@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import singleSpaReact from 'single-spa-react';
 import Root from './App';
-import { unloadApplication } from 'single-spa';
 
 const reactLifecycles = singleSpaReact({
   React,
@@ -24,7 +23,7 @@ export function mount(props) {
 
 export function unmount(props) {
   console.debug('react app unmount', props);
-  unloadApplication('app-1'); // 卸载react app,会触发unload生命周期
+  // unloadApplication('app-1'); // 卸载react app,会触发unload生命周期
   return reactLifecycles.unmount(props);
 }
 
@@ -41,8 +40,14 @@ function domElementGetter() {
   if (!el) {
     el = document.createElement('div');
     el.id = 'app1';
+    el.style.marginTop = '100px';
     document.body.appendChild(el);
   }
 
   return el;
+}
+
+// 热更新 (FIXME 暂时无效)
+if (module.hot) {
+  module.hot.accept();
 }

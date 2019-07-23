@@ -1,15 +1,12 @@
 import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
-
+import './App';
 // 参考：https://github.com/CanopyTax/single-spa-examples/tree/master/src/vue
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
     el: '#app3',
-    data: {
-      message: 'Hello Vue.js!',
-    },
-    template: `<div style="margin-top: 100px;" id="app3">{{message}}</div>`,
+    template: `<root-vue id="app3" style="margin-top: 100px;" />`,
   },
 });
 
@@ -17,4 +14,8 @@ export const bootstrap = vueLifecycles.bootstrap;
 
 export const mount = vueLifecycles.mount;
 
-export const unmount = vueLifecycles.unmount;
+export const unmount = function(props) {
+  console.debug('Vue app unmount');
+  document.querySelector('#app3').remove();
+  return vueLifecycles.unmount(props);
+};
