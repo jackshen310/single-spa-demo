@@ -2,6 +2,7 @@ import { registerApplication, start } from 'single-spa';
 import config from './config/dev';
 import '../navbar/src/index.css'; // FIXME 这个样式放到navbar项目不生效，故先临时放在这里
 import * as singleSpa from 'single-spa';
+import MsgCenter from './MsgCenter';
 
 window.SystemJS = window.System;
 window.singleSpa = singleSpa;
@@ -28,9 +29,13 @@ window.singleSpa = singleSpa;
 // registerApplication('app-3', () => loadApp('app3'), pathPrefix('/app3'), {
 //   appInfo: 'vue app',
 // });
-
+const globalMsgCenter = new MsgCenter();
 config.apps.forEach(item => {
-  registerApplication(item.name, () => SystemJS.import(item.main), item.base ? () => true : pathPrefix(item.path));
+  // 将全局globalMsgCenter对象注入到每一个single-spa应用
+  const customProps = {
+    globalMsgCenter: globalMsgCenter,
+  };
+  registerApplication(item.name, () => SystemJS.import(item.main), item.base ? () => true : pathPrefix(item.path), customProps);
 });
 
 start();

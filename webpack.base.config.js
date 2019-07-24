@@ -15,7 +15,7 @@ module.exports = {
   },
   resolve: {
     // import时可以忽略文件后缀，例如 import App from './App', 而不需要 './App.jsx'
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
   },
   module: {
     // 链式loader执行顺序从右至左或者自下而上
@@ -24,6 +24,12 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
+      },
+      // ts-loader http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-2%E4%BD%BF%E7%94%A8TypeScript%E8%AF%AD%E8%A8%80.html
+      {
+        test: /\.tsx?$/,
+        use: ['ts-loader'],
+        exclude: /node_modules/,
       },
     ],
   },

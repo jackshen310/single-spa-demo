@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 require('./index.css');
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.globalMsgCenter = props.globalMsgCenter;
+  }
   componentDidCatch(error, info) {
     console.error(error, info);
   }
@@ -19,6 +23,13 @@ class App extends React.Component {
           <Link href="/app3" to="/app3">
             <li>App 3</li>
           </Link>
+          <button
+            onClick={() => {
+              this.globalMsgCenter.publish('navbar-click', 'click');
+            }}
+          >
+            send msg
+          </button>
         </Router>
       </ul>
     );

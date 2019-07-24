@@ -12,7 +12,12 @@ if (!process.env.SINGLE_SPA) {
 const reactLifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent: App,
+  rootComponent: spa => {
+    // 我们在创建生命周期的时候,把消息总线传入的东西,以props的形式传入组件当中
+    // 这样,在每个模块中就可以直接调用跟查询其他模块的api与状态了
+    console.log(spa);
+    return <App globalMsgCenter={spa.globalMsgCenter} />;
+  },
   domElementGetter,
 });
 

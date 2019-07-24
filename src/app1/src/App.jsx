@@ -4,6 +4,22 @@ import routes from './routes';
 import RouteWithSubRoutes from './RouteWithSubRoutes';
 import { funcA } from './util';
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    // 使用从props中传递过来的globalMsgCenter消息总线，并使用该消息总线发布和订阅事件，以便和其它微服务沟通
+    if (props.globalMsgCenter) {
+      this.globalMsgCenter = props.globalMsgCenter;
+      this.initEvent();
+    }
+  }
+  initEvent() {
+    this.token = this.globalMsgCenter.subscribe('navbar-click', (topic, data) => {
+      console.log('navbar-click', data);
+    });
+  }
+  componentWillUnmount() {
+    this.token && this.globalMsgCenter.unsubscribe(token);
+  }
   fallback = () => {
     return <div>Loading...</div>;
   };

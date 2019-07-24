@@ -6,7 +6,8 @@
     "importHelpers": true,
     "jsx": "react", // 开启 jsx ，支持 React
     "esModuleInterop": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "downlevelIteration": true
   },
   "exclude": [
     // 不编译这些目录里的文件
