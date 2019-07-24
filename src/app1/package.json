@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "webpack --config webpack.prod.config.js  --display-used-exports --optimize-minimize",
     "dev": "webpack-dev-server --config webpack.dev.config.js",
-    "dev:spa": "webpack-dev-server --config webpack.dev.spa.config.js"
+    "dev:spa": "webpack-dev-server --config webpack.dev.spa.config.js",
+    "prod:spa": "webpack --config webpack.prod.spa.config.js"
   },
   "keywords": [],
   "author": "",

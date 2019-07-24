@@ -6,6 +6,8 @@ module.exports = merge(baseWebpackConfig, {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   plugins: [
-    new CleanWebpackPlugin(), // 删除dist目录
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['*', '!app1/*', '!app2/*', '!app3/*', '!navbar/*'],
+    }), // 删除dist目录
   ],
 });

@@ -4,9 +4,16 @@ single-spa 学习记录
 
 ## 开始
 
+### dev 模式
+
 1. run `yarn install-all`
-2. run `yarn dev:all`
+2. run `yarn dev:spa:all`
 3. run `yarn dev`
+
+### prod 模式
+
+2. run `yarn prod:spa:all`
+3. run `yarn prod`
 
 ## 精品文章
 
