@@ -1,8 +1,10 @@
 import { registerApplication, start } from 'single-spa';
 import config from './config/dev';
 import '../navbar/src/index.css'; // FIXME 这个样式放到navbar项目不生效，故先临时放在这里
+import * as singleSpa from 'single-spa';
 
 window.SystemJS = window.System;
+window.singleSpa = singleSpa;
 /**
  * 第四个参数为自定义属性 https://single-spa.js.org/docs/building-applications.html
  share a common access token with all child apps

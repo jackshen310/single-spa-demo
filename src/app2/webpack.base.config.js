@@ -11,7 +11,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
-    index: ['./src/index.ts'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    index: ['./src/index.js'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-2Output.html
   output: {

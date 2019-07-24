@@ -3,8 +3,13 @@ import 'reflect-metadata';
 import singleSpaAngular from 'single-spa-angular';
 import { ApplicationRef, NgZone } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import mainModule from './main-module.ts';
+import mainModule from './main-module';
 import { Router } from '@angular/router';
+
+console.log('----------------', process.env.SINGLE_SPA);
+if (!process.env.SINGLE_SPA) {
+  platformBrowserDynamic().bootstrapModule(mainModule);
+}
 
 const ngLifecycles = singleSpaAngular({
   domElementGetter,
