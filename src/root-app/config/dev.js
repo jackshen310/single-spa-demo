@@ -4,8 +4,30 @@ import app3Config from '../../app3/config/dev';
 import navbarConfig from '../../navbar/config/dev';
 
 export default {
-  app1: app1Config,
-  app2: app2Config,
-  app3: app3Config,
-  navbar: navbarConfig,
+  apps: [
+    {
+      name: 'navbar',
+      path: '',
+      main: `http://localhost:${navbarConfig.port}/index.js`,
+      base: true,
+    },
+    {
+      name: 'app-1',
+      path: '/app1',
+      main: `http://localhost:${app1Config.port}/index.js`,
+      base: false,
+    },
+    {
+      name: 'app-2',
+      path: '/app2',
+      main: `http://localhost:${app2Config.port}/index.js`,
+      base: false,
+    },
+    {
+      name: 'app-3',
+      path: '/app3',
+      main: `http://localhost:${app3Config.port}/index.js`,
+      base: false,
+    },
+  ],
 };
