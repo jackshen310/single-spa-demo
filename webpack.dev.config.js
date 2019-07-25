@@ -25,7 +25,9 @@ module.exports = merge.smart(baseWebpackConfig, {
     host: '0.0.0.0', //主机地址
     port: config.port, //端口号
     compress: true, //开发服务器是否启动gzip等压缩
-    historyApiFallback: true,
+    historyApiFallback: {
+      verbose: true, // 打印日志，方便排查问题
+    },
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-7%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE%E9%A1%B9.html
   watchOptions: {

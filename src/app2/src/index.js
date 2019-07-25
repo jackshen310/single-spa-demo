@@ -42,8 +42,7 @@ function domElementGetter() {
   if (!el) {
     el = document.createElement('div');
     el.id = 'app2';
-    el.style.marginTop = '100px';
-    document.body.appendChild(el);
+    document.querySelector('.ant-layout-content').appendChild(el);
   }
 
   return el;

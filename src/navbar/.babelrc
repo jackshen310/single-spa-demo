@@ -8,5 +8,15 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["dynamic-import-webpack", "@babel/plugin-proposal-class-properties"]
+  "plugins": [
+    "dynamic-import-webpack",
+    "@babel/plugin-proposal-class-properties",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ]
+  ]
 }

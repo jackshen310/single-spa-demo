@@ -54,13 +54,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader, // 替换style-loader
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-            },
-          },
+          'style-loader',
           'css-loader',
           {
             // 自定义loader
@@ -71,6 +65,10 @@ module.exports = {
           },
           'sass-loader',
         ],
+      },
+      {
+        test: /\.less$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'less-loader', options: { javascriptEnabled: true } }],
       },
     ],
   },

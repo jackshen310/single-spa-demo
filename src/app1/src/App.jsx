@@ -18,7 +18,7 @@ export default class App extends Component {
     });
   }
   componentWillUnmount() {
-    this.token && this.globalMsgCenter.unsubscribe(token);
+    // this.token && this.globalMsgCenter.unsubscribe(token);
   }
   fallback = () => {
     return <div>Loading...</div>;

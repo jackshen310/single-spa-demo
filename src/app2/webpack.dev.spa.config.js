@@ -10,6 +10,7 @@ webpackConfig.output.library = 'index';
 webpackConfig.output.libraryTarget = 'amd';
 webpackConfig.output.publicPath = `http://localhost:${config.port}/`;
 
+webpackConfig.plugins.splice(0, 1); // 不需要HtmlWebpackPlugin
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.SINGLE_SPA': 'true',

@@ -7,6 +7,7 @@ webpackConfig.output.library = 'index';
 webpackConfig.output.libraryTarget = 'amd';
 webpackConfig.output.publicPath = `/app1/`;
 
+webpackConfig.plugins.splice(0, 1);
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.SINGLE_SPA': 'true',
