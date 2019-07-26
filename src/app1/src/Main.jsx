@@ -1,33 +1,42 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import React, { Component, Suspense } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import PagesRouter from './pages/PagesRouter';
+import { Layout, Menu, Icon } from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-require('./index.css');
 
-class App extends React.Component {
+export default class Main extends Component {
   constructor(props) {
     super(props);
-    this.globalMsgCenter = props.globalMsgCenter;
+    // 使用从props中传递过来的globalMsgCenter消息总线，并使用该消息总线发布和订阅事件，以便和其它微服务沟通
+    if (props.globalMsgCenter) {
+      this.globalMsgCenter = props.globalMsgCenter;
+      this.initEvent();
+    }
   }
-  componentDidCatch(error, info) {
-    console.error(error, info);
+  initEvent() {
+    this.token = this.globalMsgCenter.subscribe('navbar-click', (topic, data) => {
+      console.log('navbar-click', data);
+    });
   }
+  componentWillUnmount() {
+    // this.token && this.globalMsgCenter.unsubscribe(token);
+  }
+
+  componentDidCatch(e) {
+    console.error(e);
+  }
+  // React.lazy和Suspense使用参考：https://juejin.im/post/5bd70def6fb9a05d38282c30
   render() {
+    console.log('render Main...');
     return (
-      <Router>
+      <Router basename="/app1">
         <Layout>
           <Header className="header">
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px' }}>
               <Menu.Item key="1">
                 <Link to="/app1">app 1</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/app2">app 2</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/app3">app 3</Link>
               </Menu.Item>
             </Menu>
           </Header>
@@ -39,15 +48,15 @@ class App extends React.Component {
                   title={
                     <span>
                       <Icon type="user" />
-                      app1 1
+                      subnav 1
                     </span>
                   }
                 >
                   <Menu.Item key="1">
-                    <Link to="/app1/pageA">page A</Link>
+                    <Link to="/pageA">page A</Link>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/app1/pageB">page B</Link>
+                    <Link to="/pageB">page B</Link>
                   </Menu.Item>
                   <Menu.Item key="3">option3</Menu.Item>
                   <Menu.Item key="4">option4</Menu.Item>
@@ -83,11 +92,6 @@ class App extends React.Component {
               </Menu>
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
-              {/* <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb> */}
               <Content
                 style={{
                   background: '#fff',
@@ -95,7 +99,9 @@ class App extends React.Component {
                   margin: 0,
                   minHeight: 280,
                 }}
-              />
+              >
+                <PagesRouter />
+              </Content>
             </Layout>
           </Layout>
         </Layout>
@@ -103,5 +109,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
