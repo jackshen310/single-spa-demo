@@ -61,8 +61,12 @@ class App extends React.Component {
                     </span>
                   }
                 >
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
+                  <Menu.Item key="5">
+                    <Link to="/app3/pageA">page A</Link>
+                  </Menu.Item>
+                  <Menu.Item key="6">
+                    <Link to="/app3/pageB">page B</Link>
+                  </Menu.Item>
                   <Menu.Item key="7">option7</Menu.Item>
                   <Menu.Item key="8">option8</Menu.Item>
                 </SubMenu>

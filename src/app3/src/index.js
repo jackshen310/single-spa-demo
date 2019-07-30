@@ -1,20 +1,31 @@
 import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
-import './App';
+import Antd from 'ant-design-vue';
+import Main from './Main.vue';
+import router from './pages/routers';
+import Router from 'vue-router';
 
-console.log('abc', process.env.SINGLE_SPA);
+import 'ant-design-vue/dist/antd.css'; // TODO 后续改为按需导入
+Vue.config.productionTip = false;
+Vue.use(Antd);
+Vue.use(Router);
+
 if (!process.env.SINGLE_SPA) {
-  new Vue({
+  const app3 = new Vue({
     el: '#root',
-    template: `<root-vue />`,
+    router,
+    components: { Main },
+    template: '<Main/>',
   });
+  window.app3 = app3;
 }
 
 // 参考：https://github.com/CanopyTax/single-spa-examples/tree/master/src/vue
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
-    template: `<root-vue id="app3"/>`,
+    router,
+    template: `<router-view base="/app3" mode="history"></router-view>`,
   },
 });
 
@@ -27,7 +38,7 @@ export const mount = function(props) {
 
 export const unmount = function(props) {
   console.debug('Vue app unmount');
-  document.querySelector('#app3').remove();
+  // document.querySelector('#app3').remove();
   return vueLifecycles.unmount(props);
 };
 

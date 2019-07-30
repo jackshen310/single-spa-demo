@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //引入html-webpack-plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 使用参考：https://www.npmjs.com/package/mini-css-extract-plugin
-
+const { VueLoaderPlugin } = require('vue-loader');
 // http://webpack.wuhaolin.cn/4%E4%BC%98%E5%8C%96/4-3%E4%BD%BF%E7%94%A8HappyPack.html
 const HappyPack = require('happypack');
 // 构造出共享进程池，进程池中包含5个子进程
@@ -27,7 +27,7 @@ module.exports = {
   // },
   resolve: {
     // import时可以忽略文件后缀，例如 import App from './App', 而不需要 './App.jsx'
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
     },
@@ -39,38 +39,28 @@ module.exports = {
     rules: [
       {
         // react loader
-        test: /\.(js|jsx)?$/,
+        test: /\.(jsx)?$/,
         // 把对 .js 文件的处理转交给 id 为 babel 的 HappyPack 实
         use: ['happypack/loader?id=babel'],
         exclude: /node_modules/,
       },
       // ts-loader http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-2%E4%BD%BF%E7%94%A8TypeScript%E8%AF%AD%E8%A8%80.html
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
         test: /\.tsx?$/,
         use: ['ts-loader'],
         exclude: /node_modules/,
       },
       {
-        test: /\.(sa|sc|c)ss$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader, // 替换style-loader
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-            },
-          },
-          'css-loader',
-          {
-            // 自定义loader
-            loader: 'my-loader',
-            options: {
-              arg: 'test',
-            },
-          },
-          'sass-loader',
-        ],
+        test: /\.less$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'less-loader', options: { javascriptEnabled: true } }],
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
       },
     ],
   },
@@ -102,5 +92,6 @@ module.exports = {
       // ... 其它配置项
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new VueLoaderPlugin(),
   ],
 };
