@@ -1,8 +1,3 @@
-import app1Config from '../../app1/config/dev';
-import app2Config from '../../app2/config/dev';
-import app3Config from '../../app3/config/dev';
-import navbarConfig from '../../navbar/config/dev';
-
 export default {
   apps: [
     {

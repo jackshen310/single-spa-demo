@@ -34,6 +34,7 @@ const server = http.createServer(function(req, res) {
   // You can define here your custom logic to handle the request
   // and then proxy the request.
   let flag = true;
+  console.error('url: ' + req.url);
   routers.forEach(item => {
     if (req.url.startsWith(item.path)) {
       proxy.web(req, res, {

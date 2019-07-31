@@ -20,7 +20,7 @@
     "dev:app3": "cd ./src/app3/ && yarn dev",
     "dev:navbar": "cd ./src/navbar/ && yarn dev",
     "dev:spa:app1": "cd ./src/app1/ && yarn dev:spa",
-    "dev:spa:app2": "cd ./src/app2/ && yarn dev:spa",
+    "dev:spa:app2": "cd ./src/app2/ && npm run serve:single-spa",
     "dev:spa:app3": "cd ./src/app3/ && yarn dev:spa",
     "dev:spa:navbar": "cd ./src/navbar/ && yarn dev:spa",
     "dev:server": "cd ./server/ && yarn dev",
