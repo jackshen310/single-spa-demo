@@ -25,9 +25,21 @@ module.exports = merge.smart(baseWebpackConfig, {
     host: '0.0.0.0', //主机地址
     port: config.port, //端口号
     compress: true, //开发服务器是否启动gzip等压缩
-    historyApiFallback: {
-      verbose: true, // 打印日志，方便排查问题
-    },
+    historyApiFallback: false, // 这里不需要设置为true，让proxy统一管理
+    // 参考：https://segmentfault.com/a/1190000016314976
+    proxy: [
+      {
+        context: ['/navbar', '/app1', '/app2', '/app3'],
+        target: 'http://localhost:9089',
+        bypass: function(req, res, proxyOptions) {
+          if (!req.url.includes('.')) {
+            // 非资源请求(例如：http://localhost:9090/app1/pageA)，重定向到index.html
+            // 资源请求（例如：http://localhost:9090/app1/index.js), 则通过代理转发
+            return '/index.html';
+          }
+        },
+      },
+    ],
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-7%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE%E9%A1%B9.html
   watchOptions: {
