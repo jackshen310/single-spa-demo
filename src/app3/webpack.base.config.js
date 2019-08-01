@@ -12,6 +12,7 @@ module.exports = {
   // 高级用法参考：http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-1Entry.html
   entry: {
     index: ['./src/index.js'], //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    store: ['./src/Store.js'],
   },
   // http://webpack.wuhaolin.cn/2%E9%85%8D%E7%BD%AE/2-2Output.html
   output: {
@@ -37,12 +38,23 @@ module.exports = {
   module: {
     // 链式loader执行顺序从右至左或者自下而上
     rules: [
+      // {
+      //   // react loader
+      //   test: /\.(js|jsx)?$/,
+      //   // 把对 .js 文件的处理转交给 id 为 babel 的 HappyPack 实
+      //   use: ['happypack/loader?id=babel'],
+      //   exclude: /node_modules/,
+      // },
       {
-        // react loader
-        test: /\.(jsx)?$/,
-        // 把对 .js 文件的处理转交给 id 为 babel 的 HappyPack 实
-        use: ['happypack/loader?id=babel'],
-        exclude: /node_modules/,
+        test: /Store\.js$/, // 只对Store.js处理
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          // options: {
+          //   presets: ['@babel/preset-env'],
+          //   plugins: ['@babel/transform-runtime'],
+          // },
+        },
       },
       // ts-loader http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-2%E4%BD%BF%E7%94%A8TypeScript%E8%AF%AD%E8%A8%80.html
       {

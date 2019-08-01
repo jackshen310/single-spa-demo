@@ -2,7 +2,8 @@
   "presets": ["@babel/preset-env"],
   "plugins": [
     "transform-vue-jsx",
-    "transform-runtime",
+    "@babel/transform-runtime",
+    "@babel/plugin-proposal-class-properties",
     ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": true }]
   ]
 }

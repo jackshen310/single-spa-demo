@@ -9,26 +9,45 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.globalMsgCenter = props.globalMsgCenter;
+    this.state = {
+      appStores: window.stores,
+      currAppStore: window.stores[0],
+      menus: [],
+    };
   }
   componentDidCatch(error, info) {
     console.error(error, info);
   }
+
+  componentDidMount() {
+    this.loadAppMenus(this.state.currAppStore);
+  }
+
+  loadAppMenus = store => {
+    if (store) {
+      store.getAppMenuInfo().then(menus => {
+        this.setState({ menus, currAppStore: store });
+        console.log(menus);
+      });
+    }
+  };
   render() {
+    const { menus, currAppStore, appStores } = this.state;
     return (
       <Router>
         <Layout>
           <Header className="header">
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px' }}>
-              <Menu.Item key="1">
-                <Link to="/app1">app 1</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/app2">app 2</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/app3">app 3</Link>
-              </Menu.Item>
+              {appStores.map(store => {
+                return (
+                  <Menu.Item key={store.appPath}>
+                    <Link to={store.appPath} onClick={this.loadAppMenus.bind(this, store)}>
+                      {store.appName}
+                    </Link>
+                  </Menu.Item>
+                );
+              })}
             </Menu>
           </Header>
           <Layout>
@@ -39,54 +58,17 @@ class App extends React.Component {
                   title={
                     <span>
                       <Icon type="user" />
-                      app1 1
+                      {currAppStore.appName}
                     </span>
                   }
                 >
-                  <Menu.Item key="1">
-                    <Link to="/app1/pageA">page A</Link>
-                  </Menu.Item>
-                  <Menu.Item key="2">
-                    <Link to="/app1/pageB">page B</Link>
-                  </Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span>
-                      <Icon type="laptop" />
-                      subnav 2
-                    </span>
-                  }
-                >
-                  <Menu.Item key="5">
-                    <Link to="/app2/pageA">page A</Link>
-                  </Menu.Item>
-                  <Menu.Item key="6">
-                    <Link to="/app2/pageB">page B</Link>
-                  </Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  title={
-                    <span>
-                      <Icon type="notification" />
-                      subnav 3
-                    </span>
-                  }
-                >
-                  <Menu.Item key="9">
-                    <Link to="/app3/pageA">page A</Link>
-                  </Menu.Item>
-                  <Menu.Item key="10">
-                    <Link to="/app3/pageB">page B</Link>
-                  </Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
+                  {menus.map(item => {
+                    return (
+                      <Menu.Item key={item.path}>
+                        <Link to={item.path}>{item.name}</Link>
+                      </Menu.Item>
+                    );
+                  })}
                 </SubMenu>
               </Menu>
             </Sider>

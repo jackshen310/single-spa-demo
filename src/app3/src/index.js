@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
 import Antd from 'ant-design-vue';
-import Main from './Main.vue';
+import Main from './Main';
 import router from './pages/routers';
 import Router from 'vue-router';
 
