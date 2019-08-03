@@ -27,5 +27,12 @@ export default {
       store: '/app3/store.js',
       base: false,
     },
+    {
+      name: 'app-4',
+      path: '/app4',
+      main: `/app4/umi.js`,
+      store: '/app4/store.js',
+      base: false,
+    },
   ],
 };

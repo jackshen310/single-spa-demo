@@ -24,6 +24,10 @@ const routers = [
     path: '/app3',
     target: 'http://localhost:9093',
   },
+  {
+    path: '/app4',
+    target: 'http://localhost:9095',
+  },
 ];
 //
 // Create your custom server and just call `proxy.web()` to proxy
@@ -37,8 +41,10 @@ const server = http.createServer(function(req, res) {
   console.error('url: ' + req.url);
   routers.forEach(item => {
     if (req.url.startsWith(item.path)) {
+      const target = item.target + req.url.replace(item.path, '');
+      console.log('target', target);
       proxy.web(req, res, {
-        target: item.target + req.url.replace(item.path, ''),
+        target: target,
         ignorePath: true,
       });
       flag = false;

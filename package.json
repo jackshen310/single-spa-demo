@@ -36,6 +36,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "single-spa": "^4.3.6",
     "systemjs": "^4.1.0"
   },

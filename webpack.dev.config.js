@@ -29,10 +29,10 @@ module.exports = merge.smart(baseWebpackConfig, {
     // 参考：https://segmentfault.com/a/1190000016314976
     proxy: [
       {
-        context: ['/navbar', '/app1', '/app2', '/app3'],
+        context: ['/navbar', '/app1', '/app2', '/app3', '/app4'],
         target: 'http://localhost:9089',
         bypass: function(req, res, proxyOptions) {
-          if (!req.url.includes('.')) {
+          if (!req.url.includes('.') && !req.url.includes('api')) {
             // 非资源请求(例如：http://localhost:9090/app1/pageA)，重定向到index.html
             // 资源请求（例如：http://localhost:9090/app1/index.js), 则通过代理转发
             return '/index.html';

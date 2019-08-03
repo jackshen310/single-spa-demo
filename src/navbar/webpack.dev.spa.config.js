@@ -20,4 +20,7 @@ webpackConfig.devServer.headers = {
   'Access-Control-Allow-Origin': '*',
 };
 
+// 在spa模式下，使用公共依赖
+webpackConfig.externals = [/^react$/, /^react-dom$/];
+
 module.exports = webpackConfig;

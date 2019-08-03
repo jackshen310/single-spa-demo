@@ -31,6 +31,31 @@ class App extends React.Component {
       });
     }
   };
+  renderMenu = menus => {
+    return menus.map(item => {
+      if (item.children) {
+        return (
+          <SubMenu
+            key={item.path}
+            title={
+              <span>
+                <Icon type="user" />
+                {item.name}
+              </span>
+            }
+          >
+            {this.renderMenu(item.children)}
+          </SubMenu>
+        );
+      } else {
+        return (
+          <Menu.Item key={item.path}>
+            <Link to={item.path}>{item.name}</Link>
+          </Menu.Item>
+        );
+      }
+    });
+  };
   render() {
     const { menus, currAppStore, appStores } = this.state;
     return (
@@ -53,23 +78,7 @@ class App extends React.Component {
           <Layout>
             <Sider width={200} style={{ background: '#fff' }}>
               <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: '100%', borderRight: 0 }}>
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span>
-                      <Icon type="user" />
-                      {currAppStore.appName}
-                    </span>
-                  }
-                >
-                  {menus.map(item => {
-                    return (
-                      <Menu.Item key={item.path}>
-                        <Link to={item.path}>{item.name}</Link>
-                      </Menu.Item>
-                    );
-                  })}
-                </SubMenu>
+                {this.renderMenu(menus)}
               </Menu>
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>

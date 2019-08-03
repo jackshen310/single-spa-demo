@@ -2,12 +2,18 @@
 class Store {
   menus = [
     {
-      name: 'pageA',
-      path: '/app2/pageA',
-    },
-    {
-      name: 'pageB',
-      path: '/app2/pageB',
+      name: 'app-2',
+      path: '/app2',
+      children: [
+        {
+          name: 'pageA',
+          path: '/app2/pageA',
+        },
+        {
+          name: 'pageB',
+          path: '/app2/pageB',
+        },
+      ],
     },
   ];
   appName = 'app-2';
