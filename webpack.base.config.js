@@ -17,10 +17,12 @@ module.exports = {
     // import时可以忽略文件后缀，例如 import App from './App', 而不需要 './App.jsx'
     extensions: ['.js', '.ts'],
   },
-  externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
-  },
+  // externals: {
+  //   react: 'react',
+  //   'react-dom': 'react-dom',
+  //   'vue': 'vue',
+  //   'vue-router': 'vue-router',
+  // },
   module: {
     // 链式loader执行顺序从右至左或者自下而上
     rules: [
@@ -50,6 +52,8 @@ module.exports = {
       { from: './node_modules/systemjs/dist/extras/use-default.js', to: 'extras/' },
       { from: './node_modules/react/umd/react.development.js', to: '' },
       { from: './node_modules/react-dom/umd/react-dom.development.js', to: '' },
+      { from: './node_modules/vue/dist/vue.min.js', to: '' },
+      { from: './node_modules/vue-router/dist/vue-router.min.js', to: '' },
     ]),
   ],
 };

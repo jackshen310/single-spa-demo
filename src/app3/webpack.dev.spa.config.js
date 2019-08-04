@@ -20,4 +20,13 @@ webpackConfig.devServer.headers = {
   'Access-Control-Allow-Origin': '*',
 };
 
+
+// 在spa模式下，使用公共依赖
+webpackConfig.externals = {
+  'vue': 'vue',
+  'vue-router': 'vue-router',
+};
+// 需要删除 alias  vue$: 'vue/dist/vue.esm.js', 因为要使用公共依赖，否则路由会失效
+delete webpackConfig.resolve.alias;
+
 module.exports = webpackConfig;

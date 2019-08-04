@@ -34,5 +34,12 @@ export default {
       store: '/app4/store.js',
       base: false,
     },
+    {
+      name: 'app-5',
+      path: '/app5',
+      main: `/app5/app.js`,
+      store: '/app5/store.js',
+      base: false,
+    },
   ],
 };

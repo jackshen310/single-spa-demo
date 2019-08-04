@@ -38,7 +38,7 @@ export const mount = function(props) {
 
 export const unmount = function(props) {
   console.debug('Vue app unmount');
-  // document.querySelector('#app3').remove();
+  document.querySelector('#app3').remove();
   return vueLifecycles.unmount(props);
 };
 

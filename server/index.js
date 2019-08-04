@@ -28,6 +28,10 @@ const routers = [
     path: '/app4',
     target: 'http://localhost:9095',
   },
+  {
+    path: '/app5',
+    target: 'http://localhost:9096',
+  },
 ];
 //
 // Create your custom server and just call `proxy.web()` to proxy

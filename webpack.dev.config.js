@@ -29,7 +29,7 @@ module.exports = merge.smart(baseWebpackConfig, {
     // 参考：https://segmentfault.com/a/1190000016314976
     proxy: [
       {
-        context: ['/navbar', '/app1', '/app2', '/app3', '/app4'],
+        context: ['/navbar', '/app1', '/app2', '/app3', '/app4', '/app5'],
         target: 'http://localhost:9089',
         bypass: function(req, res, proxyOptions) {
           if (!req.url.includes('.') && !req.url.includes('api')) {
