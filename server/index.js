@@ -50,6 +50,9 @@ const server = http.createServer(function(req, res) {
       proxy.web(req, res, {
         target: target,
         ignorePath: true,
+      }, (e) => {
+        // 服务异常
+        console.error(e);
       });
       flag = false;
     }

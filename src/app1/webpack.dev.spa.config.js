@@ -9,6 +9,7 @@ const config = require('./config/dev');
 webpackConfig.output.library = 'index';
 webpackConfig.output.libraryTarget = 'amd';
 webpackConfig.output.publicPath = `http://localhost:${config.port}/`;
+webpackConfig.output.jsonpFunction = 'webpackJsonp_app1';
 
 webpackConfig.plugins.splice(0, 1); // 不需要HtmlWebpackPlugin
 webpackConfig.plugins.push(

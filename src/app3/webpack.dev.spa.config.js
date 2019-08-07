@@ -8,6 +8,7 @@ const config = require('./config/dev');
 webpackConfig.output.library = 'index';
 webpackConfig.output.libraryTarget = 'amd';
 webpackConfig.output.publicPath = `http://localhost:${config.port}/`;
+webpackConfig.output.jsonpFunction = 'webpackJsonp_app3';
 
 webpackConfig.plugins.splice(0, 1); // 不需要HtmlWebpackPlugin
 webpackConfig.plugins.push(
@@ -20,10 +21,9 @@ webpackConfig.devServer.headers = {
   'Access-Control-Allow-Origin': '*',
 };
 
-
 // 在spa模式下，使用公共依赖
 webpackConfig.externals = {
-  'vue': 'vue',
+  vue: 'vue',
   'vue-router': 'vue-router',
 };
 // 需要删除 alias  vue$: 'vue/dist/vue.esm.js', 因为要使用公共依赖，否则路由会失效

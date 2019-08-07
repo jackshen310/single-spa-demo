@@ -4,6 +4,7 @@ import prodConfig from './config/prod';
 import '../navbar/src/index.css'; // FIXME 这个样式放到navbar项目不生效，故先临时放在这里
 import * as singleSpa from 'single-spa';
 import MsgCenter from './MsgCenter';
+import singleSpaLeakedGlobals from 'single-spa-leaked-globals';
 
 window.SystemJS = window.System;
 window.singleSpa = singleSpa;
@@ -43,7 +44,34 @@ async function registerApp(item) {
     }
   }
 
-  registerApplication(item.name, () => SystemJS.import(item.main), item.base ? () => true : pathPrefix(item.path), customProps);
+  registerApplication(
+    item.name,
+    async () => {
+      const { bootstrap: bootstrap, mount, unmount, globalVariableNames } = await SystemJS.import(item.main);
+
+      const leakedGlobalsLifecycles = singleSpaLeakedGlobals({
+        globalVariableNames: globalVariableNames || [],
+      });
+
+      return {
+        bootstrap: [leakedGlobalsLifecycles.bootstrap, bootstrap],
+        mount: [
+          // Make sure leaked globals lifecycles' mount function is **before** other lifecycles' mount
+          // This is so the global vars are available when the framework mounts
+          leakedGlobalsLifecycles.mount,
+          mount,
+        ],
+        unmount: [
+          unmount,
+          // Make sure leaked globals lifecycles' unmount function is **after** other lifecycles' unmount
+          // This is so the global vars are still available during the framework unmount lifecycle function.
+          leakedGlobalsLifecycles.unmount,
+        ],
+      };
+    },
+    item.base ? () => true : pathPrefix(item.path),
+    customProps
+  );
 }
 // 动态加载微应用的入口entry
 // function loadApp(app) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import singleSpaReact from 'single-spa-react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PageRouter from './pages/PagesRouter';
 import Main from './Main';
@@ -17,44 +16,41 @@ if (!process.env.SINGLE_SPA) {
   }
 }
 
-const reactLifecycles = singleSpaReact({
-  React,
-  ReactDOM,
-  rootComponent: spa => {
-    // 我们在创建生命周期的时候,把消息总线传入的东西,以props的形式传入组件当中
-    // 这样,在每个模块中就可以直接调用跟查询其他模块的api与状态了
-    return (
-      <Router basename="/app1">
-        <PageRouter globalMsgCenter={spa.globalMsgCenter} />
-      </Router>
-    );
-  },
-  domElementGetter,
-});
+// const reactLifecycles = singleSpaReact({
+//   React,
+//   ReactDOM,
+//   rootComponent: spa => {
+//     // 我们在创建生命周期的时候,把消息总线传入的东西,以props的形式传入组件当中
+//     // 这样,在每个模块中就可以直接调用跟查询其他模块的api与状态了
+//     return (
+//       <Router basename="/app1">
+//         <PageRouter globalMsgCenter={spa.globalMsgCenter} />
+//       </Router>
+//     );
+//   },
+//   domElementGetter,
+// });
 
-// This lifecycle function will be called once, right before the registered application is mounted for the first time.
-export function bootstrap(props) {
-  console.debug('react app bootstrap', props);
-  return reactLifecycles.bootstrap(props);
+export async function bootstrap() {
+  console.log('react app bootstraped');
 }
 
-export function mount(props) {
-  console.debug('react app mount', props);
-  return reactLifecycles.mount(props);
+export async function mount(props) {
+  console.log('props from main framework', props);
+  ReactDOM.render(
+    <Router basename="/app1">
+      <PageRouter globalMsgCenter={props.globalMsgCenter} />
+    </Router>,
+    domElementGetter()
+  );
 }
 
-export function unmount(props) {
-  console.debug('react app unmount', props);
-  // unloadApplication('app-1'); // 卸载react app,会触发unload生命周期
-  return reactLifecycles.unmount(props);
+export async function unmount() {
+  ReactDOM.unmountComponentAtNode(document.getElementById('app1'));
 }
 
-export function unload(props) {
-  return Promise.resolve().then(() => {
-    // Hot-reloading implementation goes here
-    console.log('react app unloaded!');
-  });
-}
+// 定义全局变量，确保应用隔离
+export const globalVariableNames = ['_', 'abc'];
 
 function domElementGetter() {
   // Make sure there is a div for us to render into
@@ -64,6 +60,5 @@ function domElementGetter() {
     el.id = 'app1';
     document.querySelector('.ant-layout-content').appendChild(el);
   }
-
   return el;
 }

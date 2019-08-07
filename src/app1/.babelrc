@@ -9,6 +9,12 @@
     "@babel/preset-react"
   ],
   "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
     "dynamic-import-webpack",
     "@babel/plugin-proposal-class-properties",
     [

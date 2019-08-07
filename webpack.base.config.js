@@ -50,6 +50,7 @@ module.exports = {
       { from: './node_modules/systemjs/dist/extras/amd.js', to: 'extras/' },
       { from: './node_modules/systemjs/dist/extras/named-exports.js', to: 'extras/' },
       { from: './node_modules/systemjs/dist/extras/use-default.js', to: 'extras/' },
+      // { from: './node_modules/systemjs/dist/extras/transform.js', to: 'extras/' },
       { from: './node_modules/react/umd/react.development.js', to: '' },
       { from: './node_modules/react-dom/umd/react-dom.development.js', to: '' },
       { from: './node_modules/vue/dist/vue.min.js', to: '' },
