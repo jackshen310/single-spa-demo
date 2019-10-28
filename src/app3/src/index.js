@@ -32,6 +32,7 @@ if (!process.env.SINGLE_SPA) {
 export const globalVariableNames = ['_'];
 
 let instance = null;
+let styles = '';
 export async function bootstrap() {
   console.log('react app bootstraped');
 }
@@ -43,21 +44,19 @@ export async function mount(props) {
     router,
     template: `<router-view base="/app3" mode="history"></router-view>`,
   });
+  document.querySelector('#app2_style').innerHTML = styles;
 }
 
 export async function unmount() {
   instance.$destroy();
   instance = null;
+  styles = document.querySelector('#app2_style').innerHTML;
+  document.querySelector('#app2_style').innerHTML = '';
+  console.log('ant-design-pro-vue unmount');
 }
 
 function domElementGetter() {
   // Make sure there is a div for us to render into
   let el = document.getElementById('app3');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'app3';
-    document.querySelector('.ant-layout-content').appendChild(el);
-  }
-
   return el;
 }

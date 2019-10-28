@@ -72,7 +72,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: [
+          {
+            loader: 'style-loader',
+            // options: {
+            //   // 指定插入style元素的位置，方便样式隔离
+            //   insertInto: process.env.SINGLE_SPA ? '#app2_style' : '#app2_style',
+            // },
+          },
+          'css-loader',
+        ],
       },
     ],
   },

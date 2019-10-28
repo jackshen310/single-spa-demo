@@ -55,7 +55,13 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         // exclude: /node_modules/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              // 指定插入style元素的位置，方便样式隔离
+              insertInto: process.env.SINGLE_SPA ? '#app1_style' : 'head',
+            },
+          },
           'css-loader',
           {
             // 自定义loader

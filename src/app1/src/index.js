@@ -30,8 +30,9 @@ if (!process.env.SINGLE_SPA) {
 //   },
 //   domElementGetter,
 // });
-
+let styles = '';
 export async function bootstrap() {
+  // domElementGetter();
   console.log('react app bootstraped');
 }
 
@@ -43,10 +44,15 @@ export async function mount(props) {
     </Router>,
     domElementGetter()
   );
+  // 还原样式代码
+  document.querySelector('#app1_style').innerHTML = styles;
 }
 
 export async function unmount() {
-  ReactDOM.unmountComponentAtNode(document.getElementById('app1'));
+  ReactDOM.unmountComponentAtNode(domElementGetter());
+  // 删除样式代码
+  styles = document.querySelector('#app1_style').innerHTML;
+  document.querySelector('#app1_style').innerHTML = '';
 }
 
 // 定义全局变量，确保应用隔离
@@ -54,11 +60,5 @@ export const globalVariableNames = ['_', 'abc'];
 
 function domElementGetter() {
   // Make sure there is a div for us to render into
-  let el = document.getElementById('app1');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'app1';
-    document.querySelector('.ant-layout-content').appendChild(el);
-  }
-  return el;
+  return document.querySelector('#app1');
 }

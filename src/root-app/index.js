@@ -59,10 +59,10 @@ async function registerApp(item) {
           // Make sure leaked globals lifecycles' mount function is **before** other lifecycles' mount
           // This is so the global vars are available when the framework mounts
           leakedGlobalsLifecycles.mount,
-          mount,
+          ...toArray(mount),
         ],
         unmount: [
-          unmount,
+          ...toArray(unmount),
           // Make sure leaked globals lifecycles' unmount function is **after** other lifecycles' unmount
           // This is so the global vars are still available during the framework unmount lifecycle function.
           leakedGlobalsLifecycles.unmount,
@@ -72,6 +72,9 @@ async function registerApp(item) {
     item.base ? () => true : pathPrefix(item.path),
     customProps
   );
+}
+function toArray(args) {
+  return Array.isArray(args) ? args : [args];
 }
 // 动态加载微应用的入口entry
 // function loadApp(app) {

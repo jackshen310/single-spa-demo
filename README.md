@@ -8,7 +8,8 @@ single-spa 学习记录
 
 1. run `yarn install-all`
 2. run `yarn dev:spa:all`
-3. run `yarn dev`
+3. run `dev:server`
+4. run `yarn dev`
 
 ### prod 模式
 
