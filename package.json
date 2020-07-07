@@ -55,7 +55,7 @@
     "concurrently": "^4.1.1",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^3.0.0",
-    "electron": "^5.0.6",
+    "electron": "^9.1.0",
     "electron-packager": "^14.0.1",
     "express": "^4.17.1",
     "express-history-api-fallback": "^2.2.1",
